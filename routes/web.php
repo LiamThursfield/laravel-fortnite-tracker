@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Disable routes until a FE is created
+// Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');
