@@ -14,7 +14,9 @@ class FortniteTrackerController extends Controller
      *
      * @return void
      */
-    public function __construct() {}
+    public function __construct() {
+        $this->middleware('cors');
+    }
 
     /**
      * Get the duos stats - for coops and deej
