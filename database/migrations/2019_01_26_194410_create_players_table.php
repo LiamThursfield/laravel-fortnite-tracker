@@ -16,7 +16,7 @@ class CreatePlayersTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
             $table->string('account_id');
-            $table->string('username');
+            $table->string('username')->index();
             $table->boolean('is_epic_account');
             $table->timestamp('last_fetched');
             $table->timestamps();
