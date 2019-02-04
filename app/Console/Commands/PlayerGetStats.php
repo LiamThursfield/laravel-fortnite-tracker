@@ -38,7 +38,6 @@ class PlayerGetStats extends Command
      */
     public function handle()
     {
-        dd('hey');
-
+        $this->info('Starting: Player - Get Stats');
     }
 }
