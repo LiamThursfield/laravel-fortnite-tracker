@@ -17,6 +17,7 @@ class CreatePlatformsTable extends Migration
             $table->string('id')->primary();
             $table->string('platform_friendly');
             $table->string('fn_api_code');
+            $table->string('fn_api_username_wrapper')->nullable();
             $table->timestamps();
         });
     }
