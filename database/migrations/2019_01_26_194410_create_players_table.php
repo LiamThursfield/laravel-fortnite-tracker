@@ -15,10 +15,10 @@ class CreatePlayersTable extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('account_id');
+            $table->string('account_id')->nullable();
             $table->string('username')->index();
             $table->boolean('is_epic_account');
-            $table->timestamp('last_fetched');
+            $table->timestamp('last_fetched')->nullable();;
             $table->timestamps();
         });
     }
