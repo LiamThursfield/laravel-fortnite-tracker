@@ -16,6 +16,13 @@ class PlayersTableSeeder extends Seeder
             'is_epic_account' => true
         ]);
 
+        // User with no platforms
+        DB::table('players')->insert([
+            'username' => 'JohnSmith',
+            'is_epic_account' => true,
+            'last_fetched_at' => \Carbon\Carbon::now()
+        ]);
+
         $player = \App\Models\Player::whereUsername('Liam_Thursfield')->first();
         $platforms = \App\Models\Platform::all();
 
