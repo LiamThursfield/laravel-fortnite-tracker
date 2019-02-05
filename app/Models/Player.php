@@ -26,7 +26,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Player whereUsername($value)
  * @mixin \Eloquent
  */
-class Player extends Model
-{
-    //
+class Player extends Model {
+
+    /**
+     * The platforms the Player plays on
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function platforms() {
+        return $this->belongsToMany('App\Models\Platform', 'player_platforms')->withTimestamps();
+    }
+
 }
