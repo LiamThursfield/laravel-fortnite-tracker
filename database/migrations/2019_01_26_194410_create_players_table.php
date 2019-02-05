@@ -18,7 +18,7 @@ class CreatePlayersTable extends Migration
             $table->string('account_id')->nullable();
             $table->string('username')->index();
             $table->boolean('is_epic_account');
-            $table->timestamp('last_fetched')->nullable();;
+            $table->timestamp('last_fetched')->nullable();
             $table->timestamps();
         });
     }
