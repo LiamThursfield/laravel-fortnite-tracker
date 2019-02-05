@@ -39,5 +39,8 @@ class PlayerGetAccounts extends Command
     public function handle()
     {
         $this->info('Starting: Player - Get Accounts');
+
+        // Get the oldest player to be last fetched, that does not have an account id
+        $player = Player::whereNull('account_id')->orderBy('');
     }
 }
