@@ -124,7 +124,7 @@ class FortniteTrackerController extends Controller
      */
     private function apiCall(string $url) {
         $base_url = 'https://api.fortnitetracker.com/v1/';
-        $headers = ['TRN-Api-Key' => env('TRN_API_KEY', '')];
+        $headers = ['TRN-Api-Key' => config('tracker_network.api_key')];
 
         // Make the api call
         try {
