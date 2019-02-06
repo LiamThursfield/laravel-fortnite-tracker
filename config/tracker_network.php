@@ -9,6 +9,5 @@ return [
     | Required for ALL API requests
     |
     */
-
-    'api_key' => env('TN_API_KEY', null),
+    'api_key' => env('TRN_API_KEY', null),
 ];
