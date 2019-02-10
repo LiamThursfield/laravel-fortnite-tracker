@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\ApiWrappers\TrackerNetwork\FortniteTracker\FortniteTrackerService;
+use App\Models\Platform;
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class PlayerGetAccounts extends Command
@@ -40,7 +43,48 @@ class PlayerGetAccounts extends Command
     {
         $this->info('Starting: Player - Get Accounts');
 
-        // Get the oldest player to be last fetched, that does not have an account id
-        $player = Player::whereNull('account_id')->orderBy('');
+        $player = Player::whereNull('account_id')
+            ->whereHas('platforms')
+            ->orderBy('last_fetched_at', 'asc')
+            ->first();
+
+        if (!$player) {
+            $this->info('There are no players whose accounts need fetching');
+            return true;
+        }
+
+        // If a player does not have an epic account
+        // then they need a non-pc account to allow api usage
+        if (!$player->is_epic_account) {
+            /** @var Platform $platform */
+            $platform = $player->platforms()->where('platforms.id', '<>', 'pc')->first();
+        } else {
+            /** @var Platform $platform */
+            $platform = $player->platforms()->first();
+        }
+
+        if (!$platform) {
+            $error_message = "Player {$player->username} ";
+            if (!$player->is_epic_account) {
+                $error_message .= 'does not have an epic account but has no valid (non-pc) platforms.';
+            } else {
+                $error_message .= 'has no platforms.';
+            }
+            $this->error($error_message);
+            $player->last_fetched_at = Carbon::now();
+            $player->save();
+            return false;
+        }
+
+        $api = new FortniteTrackerService(config('tracker_network.api_key'));
+        if (!$player->is_epic_account) {
+            $epic_nickname = "{$platform->fn_api_username_wrapper}({$player->username})";
+        } else {
+            $epic_nickname = $player->username . 'asdasd';
+        }
+        $stats = $api->getPlayerStats($platform->fn_api_code, $epic_nickname);
+
+
+        return true;
     }
 }
