@@ -85,7 +85,7 @@ class PlayerGetAccounts extends Command
             $epic_nickname = $player->username ;
         }
 
-        $stats = $api->getPlayerStats($platform->fn_api_code, $epic_nickname);
+        $stats = $api->getPlayerProfile($platform->fn_api_code, $epic_nickname);
         if (!$stats) {
             $this->error("Player with nickname {$epic_nickname} does not exist");
             $player->last_fetched_at = Carbon::now();
