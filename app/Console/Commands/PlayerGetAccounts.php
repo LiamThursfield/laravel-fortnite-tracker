@@ -82,7 +82,7 @@ class PlayerGetAccounts extends Command
         if (!$player->is_epic_account) {
             $epic_nickname = "{$platform->fn_api_username_wrapper}({$player->username})";
         } else {
-            $epic_nickname = $player->username . 'asdasd';
+            $epic_nickname = $player->username ;
         }
         $stats = $api->getPlayerStats($platform->fn_api_code, $epic_nickname);
 
