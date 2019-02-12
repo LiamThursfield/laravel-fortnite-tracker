@@ -89,5 +89,26 @@ class Playlist {
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getPlaylistCode() {
+        return $this->playlist_code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaylistName() {
+        return $this->playlist_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaylistPeriod() {
+        return $this->playlist_period;
+    }
+
 
 }
