@@ -43,7 +43,9 @@ class PlayerGetAccounts extends Command
     {
         $this->info('Starting: Player - Get Accounts');
 
+        // Get any players with no account id, that have not had a fetch attempt in the last 12 hours
         $player = Player::whereNull('account_id')
+            ->where('last_fetched_at', '<', Carbon::now()->subHours(12))
             ->whereHas('platforms')
             ->orderBy('last_fetched_at', 'asc')
             ->first();
