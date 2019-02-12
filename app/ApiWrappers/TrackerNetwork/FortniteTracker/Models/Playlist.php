@@ -34,7 +34,7 @@ class Playlist {
      * Convert the raw playlist code from the API into a playlist name and period
      */
     private function convertCode() {
-        $code_array = explode($this->playlist_code, '_');
+        $code_array = explode('_', $this->playlist_code);
 
         // Lifetime playlist
         if (count($code_array) == 1) {
