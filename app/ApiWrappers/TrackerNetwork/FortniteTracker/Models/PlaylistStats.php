@@ -2,7 +2,7 @@
 
 namespace App\ApiWrappers\TrackerNetwork\FortniteTracker\Models;
 
-class PlayerPlaylistStats {
+class PlaylistStats {
 
     // Define the constants for the stats codes
     public const STATS_CODE_MATCHES = 'matches.valueInt';

@@ -14,13 +14,13 @@ class PlayerStats {
     public function __construct(\stdClass $stats) {
         foreach ($stats as $playlist_code => $raw_stats) {
             $playlist = new Playlist($playlist_code);
-            $playlist_stats = new PlayerPlaylistStats($playlist, $raw_stats);
+            $playlist_stats = new PlaylistStats($playlist, $raw_stats);
             $this->updatePlaylistStats($playlist_stats);
 
         }
     }
 
-    private function updatePlaylistStats(PlayerPlaylistStats $playlist_stats) {
+    private function updatePlaylistStats(PlaylistStats $playlist_stats) {
         // Determine which stat should be updated
         $method_name = 'set';
         $method_name .= ucfirst($playlist_stats->getPlaylist()->getPlaylistName());
