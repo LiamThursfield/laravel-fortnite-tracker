@@ -73,13 +73,13 @@ class FortniteTrackerService {
 
 
     /**
-     * Get the platform stats for a player
+     * Get a player profile for a specific platform
      * @param $platform
      * @param $epic_nickname
      *
      * @return PlayerProfile|bool
      */
-    public function getPlayerStats($platform, $epic_nickname) {
+    public function getPlayerProfile($platform, $epic_nickname) {
         $url = "profile/{$platform}/{$epic_nickname}";
 
         if (empty($platform)) {
@@ -97,8 +97,13 @@ class FortniteTrackerService {
             return false;
         }
 
-        $player_stats = new PlayerProfile($result);
-        return $player_stats;
+        try {
+            $player_profile = new PlayerProfile($result);
+            return $player_profile;
+        } catch (\Exception $exception) {
+            $this->errors->push($exception->getMessage());
+            return false;
+        }
     }
 
 
