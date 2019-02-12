@@ -82,10 +82,10 @@ class Playlist {
     private function getPlaylistPeriodFromCode($code = null) {
         switch ($code) {
             case self::PLAYLIST_CODE_CURRENT_PREFIX:
-                $this->playlist_code = self::PLAYLIST_PERIOD_CURRENT;
+                $this->playlist_period = self::PLAYLIST_PERIOD_CURRENT;
                 break;
             default:
-                $this->playlist_code = "Unknown: {$code}";
+                $this->playlist_period = "Unknown: {$code}";
         }
     }
 
