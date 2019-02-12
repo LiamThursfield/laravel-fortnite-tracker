@@ -2,7 +2,7 @@
 
 namespace App\ApiWrappers\TrackerNetwork\FortniteTracker;
 
-use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerPlatform;
+use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerProfile;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Collection;
@@ -77,7 +77,7 @@ class FortniteTrackerService {
      * @param $platform
      * @param $epic_nickname
      *
-     * @return PlayerPlatform|bool
+     * @return PlayerProfile|bool
      */
     public function getPlayerStats($platform, $epic_nickname) {
         $url = "profile/{$platform}/{$epic_nickname}";
@@ -97,7 +97,7 @@ class FortniteTrackerService {
             return false;
         }
 
-        $player_stats = new PlayerPlatform($result);
+        $player_stats = new PlayerProfile($result);
         return $player_stats;
     }
 
