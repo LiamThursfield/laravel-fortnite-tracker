@@ -5,14 +5,14 @@ namespace App\ApiWrappers\TrackerNetwork\FortniteTracker\Models;
 class Platform {
 
     // Define the constants for the platform codes
-    public static const PLATFORM_CODE_XBOX = 1;
-    public static const PLATFORM_CODE_PLAYSTATION = 2;
-    public static const PLATFORM_CODE_PC = 3;
+    public const PLATFORM_CODE_XBOX = 1;
+    public const PLATFORM_CODE_PLAYSTATION = 2;
+    public const PLATFORM_CODE_PC = 3;
 
     // Define the constants for the platform names
-    public static const PLATFORM_NAME_XBOX = 'Xbox';
-    public static const PLATFORM_NAME_PLAYSTATION = 'Playstation';
-    public static const PLATFORM_NAME_PC = 'PC';
+    public const PLATFORM_NAME_XBOX = 'Xbox';
+    public const PLATFORM_NAME_PLAYSTATION = 'Playstation';
+    public const PLATFORM_NAME_PC = 'PC';
 
     private $platform_code;
     private $platform_name;

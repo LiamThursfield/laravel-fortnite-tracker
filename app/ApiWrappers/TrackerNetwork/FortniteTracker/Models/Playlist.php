@@ -5,21 +5,21 @@ namespace App\ApiWrappers\TrackerNetwork\FortniteTracker\Models;
 class Playlist {
 
     // Define the constants for playlist codes
-    public static const PLAYLIST_CODE_SOLOS = 'p2';
-    public static const PLAYLIST_CODE_DUOS = 'p10';
-    public static const PLAYLIST_CODE_SQUADS = 'p9';
+    public const PLAYLIST_CODE_SOLOS = 'p2';
+    public const PLAYLIST_CODE_DUOS = 'p10';
+    public const PLAYLIST_CODE_SQUADS = 'p9';
 
     // Define the constant for the prefix defining the current season
-    public static const PLAYLIST_CODE_CURRENT_PREFIX = 'curr';
+    public const PLAYLIST_CODE_CURRENT_PREFIX = 'curr';
 
     // Define the constants for the playlist names
-    public static const PLAYLIST_NAME_SOLOS = 'Solos';
-    public static const PLAYLIST_NAME_DUOS = 'Duos';
-    public static const PLAYLIST_NAME_SQUADS = 'Squads';
+    public const PLAYLIST_NAME_SOLOS = 'Solos';
+    public const PLAYLIST_NAME_DUOS = 'Duos';
+    public const PLAYLIST_NAME_SQUADS = 'Squads';
 
     // Define the constants for the playlist periods
-    public static const PLAYLIST_PERIOD_CURRENT = 'Current';
-    public static const PLAYLIST_PERIOD_LIFETIME = 'Lifetime';
+    public const PLAYLIST_PERIOD_CURRENT = 'Current';
+    public const PLAYLIST_PERIOD_LIFETIME = 'Lifetime';
 
     private $playlist_code;
     private $playlist_name;
