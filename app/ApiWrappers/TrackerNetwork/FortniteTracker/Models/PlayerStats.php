@@ -11,6 +11,10 @@ class PlayerStats {
     private $squads_lifetime;
     private $squads_current;
 
+    /**
+     * PlayerStats constructor.
+     * @param \stdClass $stats
+     */
     public function __construct(\stdClass $stats) {
         foreach ($stats as $playlist_code => $raw_stats) {
             $playlist = new Playlist($playlist_code);
@@ -20,6 +24,11 @@ class PlayerStats {
         }
     }
 
+    /**
+     * Update the stats for one of the playlists
+     * Uses the playlist name and period to determine which to update
+     * @param PlaylistStats $playlist_stats
+     */
     private function updatePlaylistStats(PlaylistStats $playlist_stats) {
         // Determine which stat should be updated
         $method_name = 'set';
@@ -32,26 +41,50 @@ class PlayerStats {
         }
     }
 
+    /**
+     * Set the stats for the Lifetime Solos Playlist
+     * @param $playlist_stats
+     */
     private function setSolosLifetimeStats($playlist_stats) {
         $this->solos_lifetime = $playlist_stats;
     }
 
+    /**
+     * Set the stats for the Current Season Solos Playlist
+     * @param $playlist_stats
+     */
     private function setSolosCurrentStats($playlist_stats) {
         $this->solos_current = $playlist_stats;
     }
 
+    /**
+     * Set the stats for the Lifetime Duos Playlist
+     * @param $playlist_stats
+     */
     private function setDuosLifetimeStats($playlist_stats) {
         $this->duos_lifetime = $playlist_stats;
     }
 
+    /**
+     * Set the stats for the Current Season Duos Playlist
+     * @param $playlist_stats
+     */
     private function setDuosCurrentStats($playlist_stats) {
         $this->duos_current = $playlist_stats;
     }
 
+    /**
+     * Set the stats for the Lifetime Squads Playlist
+     * @param $playlist_stats
+     */
     private function setSquadsLifetimeStats($playlist_stats) {
         $this->squads_lifetime = $playlist_stats;
     }
 
+    /**
+     * Set the stats for the Current Season Squads Playlist
+     * @param $playlist_stats
+     */
     private function setSquadsCurrentStats($playlist_stats) {
         $this->squads_current = $playlist_stats;
     }
