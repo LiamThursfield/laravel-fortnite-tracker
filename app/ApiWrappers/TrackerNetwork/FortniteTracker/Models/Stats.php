@@ -33,6 +33,10 @@ class Stats {
     protected $top_12;
     protected $top_25;
 
+    /**
+     * Stats constructor.
+     * @param \stdClass $stats
+     */
     public function __construct(\stdClass $stats) {
         $this->matches          = data_get($stats, self::STATS_CODE_MATCHES, 0);
         $this->score            = data_get($stats, self::STATS_CODE_SCORE, 0);
@@ -49,4 +53,33 @@ class Stats {
         $this->top_25           = data_get($stats, self::STATS_CODE_TOP_25, 0);
     }
 
+    /**
+     * Remove any commas and spaces from a numeric string
+     * @param $value
+     * @return int
+     */
+    private function parseNumber($value) {
+        $value = str_replace(',', '', $value);
+        $value = str_replace(' ', '', $value);
+
+        return $value;
+    }
+
+    /**
+     * Convert a numeric string to an integer
+     * @param $value
+     * @return int
+     */
+    protected function parseInteger($value) {
+        return intval($this->parseNumber($value));
+    }
+
+    /**
+     * Convert a numeric string to a float
+     * @param $value
+     * @return float
+     */
+    protected function parseFloat($value) {
+        return floatval($this->parseNumber($value));
+    }
 }
