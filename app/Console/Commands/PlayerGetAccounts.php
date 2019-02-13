@@ -85,14 +85,16 @@ class PlayerGetAccounts extends Command
             $epic_nickname = $player->username ;
         }
 
-        $stats = $api->getPlayerProfile($platform->fn_api_code, $epic_nickname);
-        if (!$stats) {
+        $profile = $api->getPlayerProfile($platform->fn_api_code, $epic_nickname);
+        if (!$profile) {
             $this->error("Player with nickname {$epic_nickname} does not exist");
-            $player->last_fetched_at = Carbon::now();
-            $player->save();
+        } else {
+            $this->info("Account ID for {$epic_nickname} is: {$profile->getAccountId()} ");
+            $player->account_id = $profile->getAccountId();
         }
+        $player->last_fetched_at = Carbon::now();
+        $player->save();
 
-
-        return true;
+        return !!$profile;
     }
 }
