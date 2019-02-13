@@ -82,4 +82,27 @@ class Stats {
     protected function parseFloat($value) {
         return floatval($this->parseNumber($value));
     }
+
+    /**
+     * Calculate the SPM using the score and matches played
+     */
+    protected function calculateScorePerMatch() {
+        if ($this->matches > 0 && $this->score > 0) {
+            $this->score_per_match = round($this->score / $this->matches, 2);
+        } else {
+            $this->score_per_match = 0;
+        }
+    }
+
+    /**
+     * Calculate the KPM using the kills and matches played
+     */
+    protected function calculateKillsPerMatch() {
+        if ($this->matches > 0 && $this->kills > 0) {
+            $this->kills_per_match = round($this->kills / $this->matches, 2);
+        } else {
+            $this->kills_per_match = 0;
+        }
+    }
+
 }
