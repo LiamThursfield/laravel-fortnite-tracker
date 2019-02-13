@@ -64,4 +64,46 @@ class PlayerProfile {
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getEpicUsername(): string {
+        return $this->epic_username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccountId(): string {
+        return $this->account_id;
+    }
+
+    /**
+     * @return Platform
+     */
+    public function getPlatform(): Platform {
+        return $this->platform;
+    }
+
+    /**
+     * @return PlayerStats
+     */
+    public function getPlayerStats(): PlayerStats {
+        return $this->player_stats;
+    }
+
+    /**
+     * @return LifetimeStats
+     */
+    public function getLifetimeStats(): LifetimeStats {
+        return $this->lifetime_stats;
+    }
+
+    /**
+     * @return Match[]
+     */
+    public function getRecentMatches(): array {
+        return $this->recent_matches;
+    }
+
 }
