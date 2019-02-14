@@ -43,7 +43,7 @@ class PlayersTableSeeder extends Seeder
         // User with a platform but no epic account
         DB::table('players')->insert([
             'username' => 'coopswastaken',
-            'is_epic_account' => true
+            'is_epic_account' => false
         ]);
 
         $player = \App\Models\Player::whereUsername('coopswastaken')->first();
