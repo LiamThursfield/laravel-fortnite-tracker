@@ -11,11 +11,14 @@ class PlatformsTableSeeder extends Seeder
      */
     public function run()
     {
+        $now = \Carbon\Carbon::now();
+
         DB::table('platforms')->insert([
             'id' => 'playstation',
             'platform_friendly' => 'Playstation',
             'fn_api_code' => 'psn',
             'fn_api_username_wrapper' => 'psn',
+            'created_at' => $now
         ]);
 
         DB::table('platforms')->insert([
@@ -23,12 +26,14 @@ class PlatformsTableSeeder extends Seeder
             'platform_friendly' => 'Xbox',
             'fn_api_code' => 'xbl',
             'fn_api_username_wrapper' => 'xbl',
+            'created_at' => $now
         ]);
 
         DB::table('platforms')->insert([
             'id' => 'pc',
             'platform_friendly' => 'PC',
             'fn_api_code' => 'pc',
+            'created_at' => $now
         ]);
     }
 }
