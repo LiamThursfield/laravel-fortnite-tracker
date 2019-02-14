@@ -17,7 +17,7 @@ class CreatePlayerPlatformsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('player_id');
             $table->string('platform_id');
-            $table->timestamp('last_fetched_at')->nullable();
+            $table->timestamp('fetched_at')->nullable();
             $table->timestamps();
 
             $table->foreign('player_id')

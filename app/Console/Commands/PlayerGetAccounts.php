@@ -45,9 +45,12 @@ class PlayerGetAccounts extends Command
 
         // Get any players with no account id, that have not had a fetch attempt in the last 12 hours
         $player = Player::whereNull('account_id')
-            ->where('last_fetched_at', '<', Carbon::now()->subHours(12))
+            ->where(function ($player) {
+                $player->where('fetched_at', '<', Carbon::now()->subHours(12))
+                    ->orWhereNull('fetched_at');
+            })
             ->whereHas('platforms')
-            ->orderBy('last_fetched_at', 'asc')
+            ->orderBy('fetched_at', 'asc')
             ->first();
 
         if (!$player) {
@@ -73,7 +76,7 @@ class PlayerGetAccounts extends Command
                 $error_message .= 'has no platforms.';
             }
             $this->error($error_message);
-            $player->last_fetched_at = Carbon::now();
+            $player->fetched_at = Carbon::now();
             $player->save();
             return false;
         }
@@ -92,7 +95,8 @@ class PlayerGetAccounts extends Command
             $this->info("Account ID for {$epic_nickname} is: {$profile->getAccountId()} ");
             $player->account_id = $profile->getAccountId();
         }
-        $player->last_fetched_at = Carbon::now();
+        $player->fetched_at = Carbon::now();
+        $player->updated_at = Carbon::now();
         $player->save();
 
         return !!$profile;
