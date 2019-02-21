@@ -46,5 +46,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PlayerPlaylistStats extends Model
 {
-    //
+    protected $guarded = [];
 }
