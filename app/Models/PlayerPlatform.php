@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
@@ -22,8 +23,21 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  */
 class PlayerPlatform extends Pivot
 {
-    //
     protected $table = 'player_platforms';
+
+    /**
+     * Get Player Platforms that have not been fetched for more than $min_minutes
+     * @param int $min_minutes
+     * @return PlayerPlatform
+     */
+    public static function requiresFetching($min_minutes = 5) {
+        return self::where(function ($player_platform) use ($min_minutes) {
+            $player_platform->where('fetched_at', '<', Carbon::now()->subMinutes($min_minutes))
+                ->orWhereNull('fetched_at')
+                ->orderBy('fetched_at', 'asc');
+        });
+    }
+
     /**
      * Get the Platform that the PlayerPlatform belongs to
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
