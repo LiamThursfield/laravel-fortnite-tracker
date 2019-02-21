@@ -25,6 +25,21 @@ class PlayerStats {
     }
 
     /**
+     * Get an array of all the playlist stats
+     * @return array
+     */
+    public function getPlaylistStats() {
+        return [
+            $this->solos_lifetime,
+            $this->squads_current,
+            $this->duos_lifetime,
+            $this->duos_current,
+            $this->squads_lifetime,
+            $this->squads_current
+        ];
+    }
+
+    /**
      * Update the stats for one of the playlists
      * Uses the playlist name and period to determine which to update
      * @param PlaylistStats $playlist_stats
