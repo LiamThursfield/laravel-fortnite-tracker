@@ -81,6 +81,8 @@ class PlayerGetAccounts extends Command
             return false;
         }
 
+        $this->info("Attempting to get {$platform->platform_friendly} account for {$player->username}");
+
         $api = new FortniteTrackerService(config('tracker_network.api_key'));
         if (!$player->is_epic_account) {
             $epic_nickname = "{$platform->fn_api_username_wrapper}({$player->username})";
