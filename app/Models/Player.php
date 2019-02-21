@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $account_id
  * @property string $username
  * @property int $is_epic_account
- * @property string|null $fetched_at
+ * @property \Illuminate\Support\Carbon|null $fetched_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Player newModelQuery()
