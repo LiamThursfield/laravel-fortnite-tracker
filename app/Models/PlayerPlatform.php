@@ -15,4 +15,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class PlayerPlatform extends Pivot
 {
     //
+    protected $table = 'player_platforms';
 }
