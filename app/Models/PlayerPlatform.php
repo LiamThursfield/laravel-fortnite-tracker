@@ -16,4 +16,19 @@ class PlayerPlatform extends Pivot
 {
     //
     protected $table = 'player_platforms';
+    /**
+     * Get the Platform that the PlayerPlatform belongs to
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function player() {
+        return $this->belongsTo(Player::class);
+    }
+
+    /**
+     * Get the Platform that the PlayerPlatform belongs to
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function platform() {
+        return $this->belongsTo(Platform::class);
+    }
 }
