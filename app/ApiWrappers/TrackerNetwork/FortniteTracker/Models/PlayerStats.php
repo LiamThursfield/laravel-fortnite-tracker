@@ -26,7 +26,7 @@ class PlayerStats {
 
     /**
      * Get an array of all the playlist stats
-     * @return array
+     * @return PlaylistStats[]
      */
     public function getPlaylistStats() {
         return [
