@@ -54,6 +54,99 @@ class Stats {
     }
 
     /**
+     * @return mixed
+     */
+    public function getMatches() {
+        return $this->matches;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScore() {
+        return $this->score;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScorePerMatch() {
+        return $this->score_per_match;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKills() {
+        return $this->kills;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKillsPerMatch() {
+        return $this->kills_per_match;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKd() {
+        return $this->kd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop1() {
+        return $this->top_1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop3() {
+        return $this->top_3;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop5() {
+        return $this->top_5;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop6() {
+        return $this->top_6;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop10() {
+        return $this->top_10;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop12() {
+        return $this->top_12;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTop25() {
+        return $this->top_25;
+    }
+
+
+
+    /**
      * Remove any commas and spaces from a numeric string
      * @param $value
      * @return int
