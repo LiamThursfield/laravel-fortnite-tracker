@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Helpers;
+
+use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerStats;
+use App\Models\PlayerPlaylistStats;
+use Carbon\Carbon;
+
+class PlayerPlaylistStatsHelper {
+
+    /**
+     * Create/Update the Player Playlist stats
+     * using the PlayerStats fetched via the API
+     * @param int|null $player_id
+     * @param string|null $platform_id
+     * @param PlayerStats|null $player_stats
+     *
+     * @return bool
+     */
+    public static function updateViaApiPlayerStats(int $player_id = null, string $platform_id = null, PlayerStats $player_stats = null) {
+        if (is_null($player_id) || is_null($platform_id) || is_null($player_stats)) {
+            return false;
+        }
+
+        $current_date = Carbon::now();
+
+        foreach ($player_stats->getPlaylistStats() as $playlist_stats) {
+
+            if (!is_null($playlist_stats)) {
+                $playlist = $playlist_stats->getPlaylist();
+                $player_playlist_stats = PlayerPlaylistStats::firstOrNew(
+                    [
+                        'player_id' => $player_id, 'platform_id' => $platform_id,
+                        'playlist' => $playlist->getPlaylistName(), 'period' => $playlist->getPlaylistPeriod()
+                    ],
+                    [
+                        'created_at' => $current_date
+                    ]
+                );
+
+                $player_playlist_stats->matches_played = $playlist_stats->getMatches();
+                $player_playlist_stats->kills = $playlist_stats->getKills();
+                $player_playlist_stats->kd = $playlist_stats->getKd();
+                $player_playlist_stats->kpm = $playlist_stats->getKillsPerMatch();
+                $player_playlist_stats->score = $playlist_stats->getScore();
+                $player_playlist_stats->spm = $playlist_stats->getScorePerMatch();
+                $player_playlist_stats->top_1 = $playlist_stats->getTop1();
+                $player_playlist_stats->top_1_ratio = $playlist_stats->getTop1() / $playlist_stats->getMatches();
+                $player_playlist_stats->top_5 = $playlist_stats->getTop1() + $playlist_stats->getTop3() + $playlist_stats->getTop5();
+                $player_playlist_stats->updated_at = $current_date;
+
+                $player_playlist_stats->save();
+                unset($player_playlist_stats);
+            }
+        }
+
+        return true;
+    }
+
+}
