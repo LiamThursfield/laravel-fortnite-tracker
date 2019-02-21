@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 /**
  * App\Models\PlayerPlatform
  *
+ * *
+ * @property int $id
+ * @property int $player_id
+ * @property string $platform_id
+ * @property \Illuminate\Support\Carbon|null $fetched_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PlayerPlatform newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PlayerPlatform newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PlayerPlatform query()
