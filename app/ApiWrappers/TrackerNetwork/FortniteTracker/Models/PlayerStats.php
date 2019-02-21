@@ -31,7 +31,7 @@ class PlayerStats {
     public function getPlaylistStats() {
         return [
             $this->solos_lifetime,
-            $this->squads_current,
+            $this->solos_current,
             $this->duos_lifetime,
             $this->duos_current,
             $this->squads_lifetime,
