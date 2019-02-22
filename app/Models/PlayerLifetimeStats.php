@@ -42,5 +42,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PlayerLifetimeStats extends Model
 {
-    //
+    protected $guarded = [];
 }
