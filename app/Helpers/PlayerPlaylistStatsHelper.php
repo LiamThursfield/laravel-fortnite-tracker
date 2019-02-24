@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerStats;
+use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\Playlist;
 use App\Models\PlayerPlaylistStats;
 use Carbon\Carbon;
 
@@ -23,15 +24,23 @@ class PlayerPlaylistStatsHelper {
         }
 
         $current_date = Carbon::now();
+        $current_season = SeasonHelper::getCurrentSeasonName();
 
         foreach ($player_stats->getPlaylistStats() as $playlist_stats) {
 
             if (!is_null($playlist_stats)) {
                 $playlist = $playlist_stats->getPlaylist();
+
+                if ($playlist->getPlaylistPeriod() === Playlist::PLAYLIST_PERIOD_CURRENT) {
+                    $period = $current_season;
+                } else {
+                    $period = $playlist->getPlaylistPeriod();
+                }
+
                 $player_playlist_stats = PlayerPlaylistStats::firstOrNew(
                     [
                         'player_id' => $player_id, 'platform_id' => $platform_id,
-                        'playlist' => $playlist->getPlaylistName(), 'period' => $playlist->getPlaylistPeriod()
+                        'playlist' => $playlist->getPlaylistName(), 'period' => $period
                     ],
                     [
                         'created_at' => $current_date
