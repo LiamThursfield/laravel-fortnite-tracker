@@ -35,6 +35,8 @@ class PlayerPlatform extends Pivot
             $player_platform->where('fetched_at', '<', Carbon::now()->subMinutes($min_minutes))
                 ->orWhereNull('fetched_at')
                 ->orderBy('fetched_at', 'asc');
+        })->whereHas('player', function ($q) {
+            $q->whereNotNull('account_id');
         });
     }
 
