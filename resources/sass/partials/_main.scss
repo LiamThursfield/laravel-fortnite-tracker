@@ -1,0 +1,29 @@
+* {
+    font-family: $font-family-body;
+    font-weight: $font-weight-body-normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: $color-neutral-2;
+    color: $color-neutral-10;
+    font-size: $font-size-3;
+    margin: 0;
+
+
+    @media screen and (max-width: 967px){
+        font-size: $font-size-2;
+    }
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+
+    &.header-font {
+        font-family: $font-family-header;
+        font-weight: $font-weight-header-bold;
+    }
+}
