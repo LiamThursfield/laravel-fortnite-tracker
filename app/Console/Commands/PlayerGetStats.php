@@ -47,61 +47,73 @@ class PlayerGetStats extends Command
         $this->info('Starting: Player - Get Stats');
         $current_date = Carbon::now();
 
-        // Get a player platform that have not been fetched in the last 5 minutes
-        /** @var PlayerPlatform $player_platform */
-        $player_platform = PlayerPlatform::requiresFetching(5)->first();
-        if (!$player_platform) {
-            $this->info('There are no player stats that need fetching');
-            return true;
-        }
-        $player_platform->fetched_at = $current_date;
-        $player_platform->save();
+        $update_count = 0;
+        $update_max = 15;
+        $update_sleep = 500000; // Half a Second (Due to API limits)
 
-        // Ensure the player and the platform are valid
-        /** @var Player $player */
-        $player = $player_platform->player;
-        /** @var Platform $platform */
-        $platform = $player_platform->platform;
-        if (!$player || !$platform) {
-            $this->error("PlayerPlatform {$player_platform->id} has an invalid player/platform.");
-            return false;
-        }
+        do {
+            // Get a player platform that have not been fetched in the last 5 minutes
+            /** @var PlayerPlatform $player_platform */
+            $player_platform = PlayerPlatform::requiresFetching(5)->first();
+            if (!$player_platform) {
+                $this->info('There are no player stats that need fetching');
+                return true;
+            }
+            $player_platform->fetched_at = $current_date;
+            $player_platform->save();
 
-        // Get the epic nickname for the player
-        if (!$player->is_epic_account) {
-            $epic_nickname = "{$platform->fn_api_username_wrapper}({$player->username})";
-        } else {
-            $epic_nickname = $player->username ;
-        }
+            // Increment the update count
+            $update_count++;
+            $this->info('Update: ' . $update_count);
 
-        $this->info("Fetching {$platform->platform_friendly} stats for {$player->username}");
-        $api = new FortniteTrackerService(config('tracker_network.api_key'));
-        $profile = $api->getPlayerProfile($platform->fn_api_code, $epic_nickname);
-        unset($epic_nickname);
+            // Ensure the player and the platform are valid
+            /** @var Player $player */
+            $player = $player_platform->player;
+            /** @var Platform $platform */
+            $platform = $player_platform->platform;
+            if (!$player || !$platform) {
+                $this->error("PlayerPlatform {$player_platform->id} has an invalid player/platform.");
+                return false;
+            }
 
-        // Ensure the api call was successful
-        if (!$profile) {
-            $this->error("Failed to fetch the player stats.");
-            return false;
-        }
+            // Get the epic nickname for the player
+            if (!$player->is_epic_account) {
+                $epic_nickname = "{$platform->fn_api_username_wrapper}({$player->username})";
+            } else {
+                $epic_nickname = $player->username ;
+            }
 
-        // Create/Update the playlist stats
-        $this->info('Updating the Player Playlist Stats');
-        if (!PlayerPlaylistStatsHelper::updateViaApiPlayerStats(
-            $player->id, $platform->id, $profile->getPlayerStats()
-        )) {
-            $this->error('Failed to update the Player Playlist Stats');
-            return false;
-        }
+            $this->info("Fetching {$platform->platform_friendly} stats for {$player->username}");
+            $api = new FortniteTrackerService(config('tracker_network.api_key'));
+            $profile = $api->getPlayerProfile($platform->fn_api_code, $epic_nickname);
+            unset($epic_nickname);
 
-        // Creat/Update the lifetime stats
-        $this->info('Updating the Player Lifetime Stats');
-        if (!PlayerLifetimeStatsHelper::updateViaApiLifetimeStats(
-            $player->id, $platform->id, $profile->getLifetimeStats()
-        )) {
-            $this->error('Failed to update the Player Lifetime Stats');
-            return false;
-        }
+            // Ensure the api call was successful
+            if (!$profile) {
+                $this->error("Failed to fetch the player stats.");
+                return false;
+            }
+
+            // Create/Update the playlist stats
+            $this->info('Updating the Player Playlist Stats');
+            if (!PlayerPlaylistStatsHelper::updateViaApiPlayerStats(
+                $player->id, $platform->id, $profile->getPlayerStats()
+            )) {
+                $this->error('Failed to update the Player Playlist Stats');
+                return false;
+            }
+
+            // Creat/Update the lifetime stats
+            $this->info('Updating the Player Lifetime Stats');
+            if (!PlayerLifetimeStatsHelper::updateViaApiLifetimeStats(
+                $player->id, $platform->id, $profile->getLifetimeStats()
+            )) {
+                $this->error('Failed to update the Player Lifetime Stats');
+                return false;
+            }
+
+            usleep($update_sleep);
+        } while ($update_count < $update_max);
 
         $this->info('Completed');
         return true;
