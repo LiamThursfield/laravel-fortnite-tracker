@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Helpers\PlayerLifetimeStatsHelper;
 
 class HomeController extends Controller
 {
@@ -20,6 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $player_stats = PlayerLifetimeStatsHelper::getAllPlayersCumulative();
+        return view('home')->with(compact('player_stats'));
     }
 }
