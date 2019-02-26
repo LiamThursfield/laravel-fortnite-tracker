@@ -1,0 +1,29 @@
+.card {
+    background: $color-neutral-1;
+    box-shadow: $box-shadow-double-1;
+    border-radius: $border-radius-general;
+    padding: $spacing-4;
+
+    strong {
+        font-weight: $font-weight-body-bold;
+        margin-right: $spacing-1;
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin-bottom: $spacing-2;
+            display: flex;
+            strong {
+                flex: 1;
+            }
+        }
+    }
+
+    .card-header {
+        margin-bottom: $spacing-4;
+    }
+}

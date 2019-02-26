@@ -1,4 +1,30 @@
-@import url(https://fonts.googleapis.com/css?family=Montserrat:500,700|Titillium+Web:600,700,900);* {
+@import url(https://fonts.googleapis.com/css?family=Montserrat:500,700|Titillium+Web:600,700,900);.container {
+  margin: 0 auto;
+  max-width: 1024px;
+  padding: 0 16px;
+}
+
+.grid-3-col {
+  display: grid;
+  grid-row-gap: 8px;
+  grid-column-gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 767px) {
+  .grid-3-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 539px) {
+  .grid-3-col {
+    grid-template-columns: 1fr;
+    grid-row-gap: 16px;
+  }
+}
+
+* {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +50,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0;
+  margin: 0;
 }
 
 h1.header-font,
@@ -35,11 +61,70 @@ h5.header-font,
 h6.header-font {
   font-family: "Titillium Web", sans-serif;
   font-weight: 900;
+  margin: 16px 0;
+}
+
+@media screen and (max-width: 539px) {
+  h1.header-font,
+  h2.header-font,
+  h3.header-font,
+  h4.header-font,
+  h5.header-font,
+  h6.header-font {
+    text-align: center;
+  }
+}
+
+h1.header-font span,
+h2.header-font span,
+h3.header-font span,
+h4.header-font span,
+h5.header-font span,
+h6.header-font span {
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 900;
+}
+
+.card {
+  background: #F5F7FA;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  padding: 16px;
+}
+
+.card strong {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card ul li {
+  margin-bottom: 8px;
+  display: flex;
+}
+
+.card ul li strong {
+  flex: 1;
+}
+
+.card .card-header {
+  margin-bottom: 16px;
 }
 
 .site-header {
   background: #1F2933;
-  padding: 16px;
+  padding: 16px 0;
+}
+
+@media screen and (max-width: 539px) {
+  .site-header {
+    text-align: center;
+  }
 }
 
 .site-header .header-logo {

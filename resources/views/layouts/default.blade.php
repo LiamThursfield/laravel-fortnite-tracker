@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div>
+<div id="app">
     @include('layouts.includes.header')
 
     @yield('content')

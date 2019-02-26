@@ -1,7 +1,11 @@
 .site-header {
 
     background: $color-neutral-10;
-    padding: $spacing-4;
+    padding: $spacing-4 0;
+
+    @media screen and (max-width: $breakpoint-max-m) {
+        text-align: center;
+    }
 
     .header-logo {
         min-height: 40px;

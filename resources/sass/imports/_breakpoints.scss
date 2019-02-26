@@ -1,0 +1,24 @@
+// Base Breakpoints
+$breakpoint-xxl: 1440px;
+$breakpoint-xl: 1024px;
+$breakpoint-l: 768px;
+$breakpoint-m: 540px;
+$breakpoint-s: 425px;
+$breakpoint-xs: 375px;
+$breakpoint-xxs: 320px;
+
+// Breakpoints for min-width queries
+$breakpoint-min-xxl: $breakpoint-xxl;
+$breakpoint-min-xl: $breakpoint-xl;
+$breakpoint-min-l: $breakpoint-l;
+$breakpoint-min-m: $breakpoint-m;
+$breakpoint-min-s: $breakpoint-s;
+$breakpoint-min-xs: $breakpoint-xs;
+
+// Breakpoints for max-width queries
+$breakpoint-max-xxl: $breakpoint-xxl - 1px;
+$breakpoint-max-xl: $breakpoint-xl - 1px;
+$breakpoint-max-l: $breakpoint-l - 1px;
+$breakpoint-max-m: $breakpoint-m - 1px;
+$breakpoint-max-s: $breakpoint-s - 1px;
+$breakpoint-max-xs: $breakpoint-xs - 1px;
