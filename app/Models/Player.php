@@ -36,4 +36,12 @@ class Player extends Model {
         return $this->belongsToMany('App\Models\Platform', 'player_platforms')->withTimestamps();
     }
 
+    /**
+     * The lifetime stats of a Player
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lifetime_stats() {
+        return $this->hasMany('App\Models\PlayerLifetimeStats');
+    }
+
 }
