@@ -66,4 +66,17 @@ class PlayerPlaylistStatsHelper {
         return true;
     }
 
+    /**
+     * Get all active seasons
+     * -- i.e. seasons that current players have played in
+     * @param string $order_direction
+     * @return String[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function getActiveSeasons($order_direction = 'ASC') {
+        return PlayerPlaylistStats::select('period')
+            ->groupBy('period')
+            ->orderBy('period', $order_direction)
+            ->get()->pluck('period');
+    }
+
 }

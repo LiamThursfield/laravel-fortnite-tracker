@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 //});
 
 // Controllers Within The "App\Http\Controllers\Admin" Namespace
-Route::namespace('Api')->group(function () {
-    Route::get('/duos', 'FortniteTrackerController@duos');
+Route::namespace('Api\v1')
+    ->prefix('v1')
+    ->group(function () {
+    Route::get('/platform_seasons', 'PlatformSeasonsController@index');
 });
