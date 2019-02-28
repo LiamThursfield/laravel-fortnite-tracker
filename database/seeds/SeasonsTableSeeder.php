@@ -65,7 +65,7 @@ class SeasonsTableSeeder extends Seeder
 
         DB::table('seasons')->insert([
             'season_name' => 'Season 8',
-            'start_date' => new Carbon('1-Mar-2018'),
+            'start_date' => new Carbon('28-Feb-2019'),
             'created_at' => $current_date,
             'updated_at' => $current_date,
         ]);
