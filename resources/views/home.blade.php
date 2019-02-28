@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1 class="header-font">Player Stats <span style="white-space: nowrap">(Cross-Platform)</span></h1>
+        <h1 class="header-font">All Playlists <span style="white-space: nowrap">(Cross-Platform)</span></h1>
 
         <div class="grid-3-col">
             @foreach ($player_stats as $username => $stat)
