@@ -1,5 +1,4 @@
-<header class="site-header">
-    <nav class="container">
-        <img src="/img/logo.png" alt="" class="header-logo">
-    </nav>
-</header>
+<vue-header
+    :platforms="{{ json_encode($platform_seasons['platforms']) }}"
+    :seasons="{{ json_encode($platform_seasons['seasons']) }}"
+></vue-header>
