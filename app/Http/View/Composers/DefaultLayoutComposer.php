@@ -13,6 +13,6 @@ class DefaultLayoutComposer {
      */
     public function compose(View $view)
     {
-        $view->with('player_platforms', PlatformSeasonsHelper::getActive());
+        $view->with('platform_seasons', PlatformSeasonsHelper::getActive());
     }
 }
