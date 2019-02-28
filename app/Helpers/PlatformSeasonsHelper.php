@@ -21,7 +21,7 @@ class PlatformSeasonsHelper {
             $platforms[$platform->id] = $platform->platform_friendly;
         }
 
-        $seasons = PlayerPlaylistStatsHelper::getActiveSeasons();
+        $seasons = PlayerPlaylistStatsHelper::getActiveSeasons()->toArray();
 
         return compact('platforms', 'seasons');
     }
