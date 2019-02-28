@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Helpers\PlatformHelper;
-use App\Helpers\PlayerPlaylistStatsHelper;
+use App\Helpers\PlatformSeasonsHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
-use Mockery\Exception;
 
 class PlatformSeasonsController extends Controller {
 
@@ -26,20 +23,8 @@ class PlatformSeasonsController extends Controller {
      * @return array
      */
     public function index(Request $request) {
-
-        // If Combined platforms is an option, add it to the array
-        if ($request->has('with_combined')) {
-            $platforms = ['combined' => 'Combined'];
-        } else {
-            $platforms = [];
-        }
-        foreach (PlatformHelper::getAllPlatforms() as $platform) {
-            $platforms[$platform->id] = $platform->platform_friendly;
-        }
-
-        $seasons = PlayerPlaylistStatsHelper::getActiveSeasons();
-
-        return compact('platforms', 'seasons');
+        $with_combined_platforms = json_decode($request->get('with_combined_platforms', false));
+        return PlatformSeasonsHelper::getActive($with_combined_platforms);
     }
 
 
