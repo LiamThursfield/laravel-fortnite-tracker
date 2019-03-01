@@ -12,3 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/solos', 'HomeController@index')->name('solos');
+Route::get('/duos', 'HomeController@index')->name('duos');
+Route::get('/squads', 'HomeController@index')->name('squads');

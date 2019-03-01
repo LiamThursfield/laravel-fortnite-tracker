@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function __construct(){}
 
     /**
-     * Show the application dashboard.
+     * Show the home page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
