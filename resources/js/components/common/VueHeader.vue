@@ -14,7 +14,7 @@
 
                 <ul class="header-platform-season-nav">
                     <li class="platform-season-nav-item season-nav-item">
-                        <div class="nav-selected">Lifetime <i class="fas fa-sort-down"></i></div>
+                        <div class="nav-selected"><span>Lifetime</span> <i class="fas fa-sort-down"></i></div>
                         <div class="nav-dropdown">
                             <ul>
                                 <li class="nav-item">Lifetime</li>
@@ -25,7 +25,7 @@
                     </li>
 
                     <li class="platform-season-nav-item platform-nav-item">
-                        <div class="nav-selected">Playstation <i class="fas fa-sort-down"></i></div>
+                        <div class="nav-selected"><span>Playstation</span> <i class="fas fa-sort-down"></i></div>
                         <div class="nav-dropdown">
                             <ul>
                                 <li class="nav-item">PC</li>
