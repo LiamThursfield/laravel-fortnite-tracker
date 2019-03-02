@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerStats;
 use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\Playlist;
+use App\Models\Player;
+use App\Models\PlayerLifetimeStats;
 use App\Models\PlayerPlaylistStats;
 use Carbon\Carbon;
 
@@ -12,14 +14,14 @@ class PlayerPlaylistStatsHelper {
     /**
      * Create/Update the Player Playlist stats
      * using the PlayerStats fetched via the API
-     * @param int|null $player_id
+     * @param Player|null $player
      * @param string|null $platform_id
      * @param PlayerStats|null $player_stats
      *
      * @return bool
      */
-    public static function updateViaApiPlayerStats(int $player_id = null, string $platform_id = null, PlayerStats $player_stats = null) {
-        if (is_null($player_id) || is_null($platform_id) || is_null($player_stats)) {
+    public static function updateViaApiPlayerStats(Player $player = null, string $platform_id = null, PlayerStats $player_stats = null) {
+        if (is_null($player) || is_null($platform_id) || is_null($player_stats)) {
             return false;
         }
 
@@ -39,7 +41,7 @@ class PlayerPlaylistStatsHelper {
 
                 $player_playlist_stats = PlayerPlaylistStats::firstOrNew(
                     [
-                        'player_id' => $player_id, 'platform_id' => $platform_id,
+                        'player_id' => $player->id, 'player_username' => $player->username, 'platform_id' => $platform_id,
                         'playlist' => $playlist->getPlaylistName(), 'period' => $period
                     ],
                     [
@@ -77,6 +79,33 @@ class PlayerPlaylistStatsHelper {
             ->groupBy('period')
             ->orderBy('period', $order_direction)
             ->get()->pluck('period');
+    }
+
+    public static function getCumulativeStats($platform = 'combined', $season = 'lifetime', $playlist = 'all') {
+
+        $stats = PlayerPlaylistStats::wherePeriod($season);
+
+        if ($platform !== 'combined') {
+            $stats->wherePlatformId($platform);
+        }
+        if ($playlist !== 'all') {
+            $stats->wherePlaylist($playlist);
+        }
+
+        $stats = $stats->groupBy('player_id')
+            ->selectRaw('player_id, sum(matches_played) as matched_played, sum(kills) as kills, sum(score) as score, sum(top_1) as top_1, sum(top_5) as $top_5, sum(matches_played - top_1) as deaths')
+            ->get();
+
+        $player_stats = [];
+
+        foreach ($stats as $player_stat) {
+           $player = $player_stat->player;
+           $player_stats[$player->username]['stats'] = $player_stat;
+           $player_stats[$player->username]['stats']['kd'] =
+               number_format(($player_stat->kills / $player_stat->deaths), 2);
+        }
+
+        return $player_stats;
     }
 
 }

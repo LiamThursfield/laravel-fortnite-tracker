@@ -97,7 +97,7 @@ class PlayerGetStats extends Command
             // Create/Update the playlist stats
             $this->info('Updating the Player Playlist Stats');
             if (!PlayerPlaylistStatsHelper::updateViaApiPlayerStats(
-                $player->id, $platform->id, $profile->getPlayerStats()
+                $player, $platform->id, $profile->getPlayerStats()
             )) {
                 $this->error('Failed to update the Player Playlist Stats');
                 return false;
@@ -106,7 +106,7 @@ class PlayerGetStats extends Command
             // Creat/Update the lifetime stats
             $this->info('Updating the Player Lifetime Stats');
             if (!PlayerLifetimeStatsHelper::updateViaApiLifetimeStats(
-                $player->id, $platform->id, $profile->getLifetimeStats()
+                $player, $platform->id, $profile->getLifetimeStats()
             )) {
                 $this->error('Failed to update the Player Lifetime Stats');
                 return false;

@@ -12,21 +12,21 @@ class PlayerLifetimeStatsHelper {
     /**
      * Create/Update the Player Lifetime stats for all players
      * using the LifetimeStats fetched via the API
-     * @param int|null $player_id
+     * @param Player|null $player
      * @param string|null $platform_id
      * @param LifetimeStats|null $lifetime_stats
      *
      * @return bool
      */
-    public static function updateViaApiLifetimeStats(int $player_id = null, string $platform_id = null, LifetimeStats $lifetime_stats = null) {
-        if (is_null($player_id) || is_null($platform_id) || is_null($lifetime_stats)) {
+    public static function updateViaApiLifetimeStats(Player $player = null, string $platform_id = null, LifetimeStats $lifetime_stats = null) {
+        if (is_null($player) || is_null($platform_id) || is_null($lifetime_stats)) {
             return false;
         }
 
         $current_date = Carbon::now();
 
         $player_lifetime_stats = PlayerLifetimeStats::firstOrNew(
-            ['player_id' => $player_id, 'platform_id' => $platform_id],
+            ['player_id' => $player->id, 'player_username' => $player->username, 'platform_id' => $platform_id],
             ['created_at' => $current_date]
         );
 
