@@ -74,7 +74,7 @@
                     clearTimeout(this.timer);
                 }
                 this.timer_loading = true;
-                
+
                 let url = '/api/v1/playlist_stats/';
                 url += this.$root.$data.selected_platform_id + '/';
                 url += this.$root.$data.selected_season + '/';
