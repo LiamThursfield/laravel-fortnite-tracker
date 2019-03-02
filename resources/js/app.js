@@ -55,6 +55,8 @@ const app = new Vue({
                     this.onFetchedPlatformSeasons();
                 })
                 .catch(error => {
+                    // TODO Show notification on error
+                    console.log(error);
                     this.loadDefaultPlatformSeasons();
                     this.onFetchedPlatformSeasons()
                 })
