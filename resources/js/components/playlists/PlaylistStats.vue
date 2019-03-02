@@ -2,7 +2,7 @@
     <section id="playlist-stats">
         <h1 class="header-font uc-words">{{ playlist_title }}</h1>
 
-        <div v-if="true" style="text-align: center">
+        <div v-if="is_loading" style="text-align: center">
             <i class="fas fa-spinner fa-spin"></i>
         </div>
 
