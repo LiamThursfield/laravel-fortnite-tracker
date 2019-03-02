@@ -2,7 +2,11 @@
     <section id="playlist-stats">
         <h1 class="header-font uc-words">{{ playlist_title }}</h1>
 
-        <div class="grid-3-col" v-if="!loading && playlist_stats && Object.keys(playlist_stats).length > 0">
+        <div v-if="is_loading" style="text-align: center">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+
+        <div class="grid-3-col" v-if="!is_loading && playlist_stats && Object.keys(playlist_stats).length > 0">
             <div class="card" v-for="stats in playlist_stats" :key="stats.player_username">
                 <h2 class="card-header">{{ stats.player_username }}</h2>
                 <ul>
@@ -15,10 +19,13 @@
             </div>
         </div>
 
-        <div v-else-if="!loading && loaded">
+        <div v-else-if="!is_loading && loaded">
             <p>
                 There are no {{ $root.selected_season }} {{ playlist_type }}
-                stats<template v-if="$root.selected_platform_id !== 'combined'"> for {{ $root.selected_platform_name }}</template>.
+                stats
+                <template v-if="$root.selected_platform_id !== 'combined'"> for {{ $root.selected_platform_name }}
+                </template>
+                .
             </p>
         </div>
 
@@ -31,7 +38,7 @@
 
     export default {
         props: {
-            playlist_type:{
+            playlist_type: {
                 type: String,
                 default: 'all'
             }
@@ -40,20 +47,34 @@
             return {
                 loading: false,
                 loaded: false,
+                timer: null,
+                timer_loading: false,
                 playlist_stats: []
             }
         },
         computed: {
-           playlist_title: function() {
-               if (this.playlist_type === 'all') {
-                   return 'All Playlists';
-               }
-               return this.playlist_type;
-           }
+            playlist_title: function () {
+                if (this.playlist_type === 'all') {
+                    return 'All Playlists';
+                }
+                return this.playlist_type;
+            },
+            is_loading: function () {
+                if (this.loading || this.timer_loading) {
+                    return true;
+                }
+                return false
+            }
         },
         methods: {
-            fetchStats: function() {
+            fetchStats: function () {
                 this.loading = true;
+
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                }
+                this.timer_loading = true;
+                
                 let url = '/api/v1/playlist_stats/';
                 url += this.$root.$data.selected_platform_id + '/';
                 url += this.$root.$data.selected_season + '/';
@@ -70,6 +91,8 @@
                         if (response.data) {
                             this.playlist_stats = response.data
                         }
+
+                        this.timer = setTimeout(this.onTimerLoaded, 200);
                     })
                     .catch(error => {
                         if (axios.isCancel(error)) {
@@ -80,7 +103,7 @@
                         this.loading = false;
                     });
             },
-            onPlatformSeasonUpdated: function() {
+            onPlatformSeasonUpdated: function () {
                 this.stopFetch();
                 this.fetchStats();
             },
@@ -88,6 +111,9 @@
                 source.cancel();
                 source = CancelToken.source();
             },
+            onTimerLoaded: function () {
+                this.timer_loading = false;
+            }
         },
         created() {
             this.$root.$on(this.$root.$data.event_platform_season_updated, () => {
