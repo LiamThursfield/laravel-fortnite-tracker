@@ -37053,11 +37053,11 @@ var render = function() {
       _vm._v(_vm._s(_vm.playlist_title))
     ]),
     _vm._v(" "),
-    _vm.is_loading
+    true
       ? _c("div", { staticStyle: { "text-align": "center" } }, [
           _c("i", { staticClass: "fas fa-spinner fa-spin" })
         ])
-      : _vm._e(),
+      : undefined,
     _vm._v(" "),
     !_vm.is_loading &&
     _vm.playlist_stats &&
