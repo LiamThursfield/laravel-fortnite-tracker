@@ -4,7 +4,6 @@
 require('./bootstrap');
 window.Vue = require('vue');
 
-
 /**
  * Register the Global Vue Components
  */
@@ -69,21 +68,23 @@ const app = new Vue({
             this.getSelectedPlatform();
             this.getSelectedSeason();
             this.loaded_platform_seasons = true;
+            this.$emit('platform_seasons_updated');
         },
 
         // Platform Methods
         getSelectedPlatform: function() {
             if (localStorage.getItem(this.local_storage_platform_id)) {
-                this.selectPlatform(localStorage.getItem(this.local_storage_platform_id));
+                this.selected_platform_id = localStorage.getItem(this.local_storage_platform_id);
             } else {
-                this.selectPlatform(Object.keys(this.platforms)[0]);
-                this.selected_season = this.seasons[0];
+                this.selected_platform_id = Object.keys(this.platforms)[0]
             }
+            this.selected_platform_name = this.platforms[this.selected_platform_id];
         },
         selectPlatform: function(platform_id) {
             this.selected_platform_id = platform_id;
             this.selected_platform_name = this.platforms[platform_id];
             localStorage.setItem(this.local_storage_platform_id, platform_id);
+            this.$emit('platform_seasons_updated');
         },
 
         // Season Methods
@@ -97,6 +98,7 @@ const app = new Vue({
         selectSeason: function(season) {
             this.selected_season = season;
             localStorage.setItem(this.local_storage_season, season);
+            this.$emit('platform_seasons_updated');
         }
     },
     created() {
