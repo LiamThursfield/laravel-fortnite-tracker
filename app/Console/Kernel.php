@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->command('player:getstats')->everyMinute();
+        $schedule->command('player:getstats')->everyMinute();
     }
 
     /**
