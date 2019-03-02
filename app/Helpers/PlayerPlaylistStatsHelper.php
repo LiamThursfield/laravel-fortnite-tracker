@@ -92,7 +92,7 @@ class PlayerPlaylistStatsHelper {
         }
 
         $stats = $stats->groupBy(['player_id', 'player_username'])
-            ->selectRaw('player_id, player_username, sum(matches_played) as matched_played, sum(kills) as kills, sum(score) as score, sum(top_1) as top_1, sum(top_5) as $top_5, sum(matches_played - top_1) as deaths')
+            ->selectRaw('player_id, player_username, sum(matches_played) as matches_played, sum(kills) as kills, sum(score) as score, sum(top_1) as top_1, sum(top_5) as $top_5, sum(matches_played - top_1) as deaths')
             ->orderBy('player_username', 'asc')
             ->get();
 
