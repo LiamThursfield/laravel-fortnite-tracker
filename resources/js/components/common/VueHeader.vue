@@ -54,10 +54,14 @@
         },
         data() {
             return {
+                // Platform Data
+                local_storage_platform_id: 'selected_platform_id',
                 selected_platform_id: '',
                 selected_platform_name: '',
-                selected_season: '',
                 show_platforms: false,
+                // Season Data
+                local_storage_season: 'selected_season',
+                selected_season: '',
                 show_seasons: false,
             }
         },
@@ -79,20 +83,39 @@
             }
         },
         methods: {
+            // Platform Methods
+            getSelectedPlatform: function() {
+                if (localStorage.getItem(this.local_storage_platform_id)) {
+                    this.selectPlatform(localStorage.getItem(this.local_storage_platform_id));
+                } else {
+                    this.selectPlatform(Object.keys(this.platforms)[0]);
+                    this.selected_season = this.seasons[0];
+                }
+            },
             selectPlatform: function(platform_id) {
-                console.log('select platform', platform_id);
                 this.selected_platform_id = platform_id;
                 this.selected_platform_name = this.platforms[platform_id];
+                localStorage.setItem(this.local_storage_platform_id, platform_id);
                 this.show_platforms = false;
+            },
+
+            // Season Methods
+            getSelectedSeason: function() {
+                if (localStorage.getItem(this.local_storage_season)) {
+                    this.selected_season = localStorage.getItem(this.local_storage_season);
+                } else {
+                    this.selected_season = this.seasons[0];
+                }
             },
             selectSeason: function(season) {
                 this.selected_season = season;
+                localStorage.setItem(this.local_storage_season, season);
                 this.show_seasons = false;
             }
         },
         mounted() {
-            this.selected_season = this.seasons[0];
-            this.selectPlatform(Object.keys(this.platforms)[0]);
+            this.getSelectedPlatform();
+            this.getSelectedSeason();
         }
     }
 </script>
