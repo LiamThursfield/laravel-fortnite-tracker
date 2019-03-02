@@ -48,10 +48,6 @@
 
 <script>
     export default {
-        props: {
-            platforms: Object,
-            seasons: Array
-        },
         data() {
             return {
                 // Platform Data
