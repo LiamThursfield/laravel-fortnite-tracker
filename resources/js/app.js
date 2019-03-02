@@ -51,22 +51,24 @@ const app = new Vue({
                         this.platforms = response.data.platforms;
                         this.seasons = response.data.seasons;
                     } else {
-                        this.platforms = this.default_platforms;
-                        this.seasons = this.default_seasons;
+                        this.loadDefaultPlatformSeasons();
                     }
-
-                    this.getSelectedPlatform();
-                    this.getSelectedSeason();
-                    this.loaded_platform_seasons = true;
+                    this.onFetchedPlatformSeasons();
                 })
                 .catch(error => {
-                    // TODO, error notifications
-                    this.platforms = this.default_platforms;
-                    this.seasons = this.default_seasons;
-                    this.getSelectedPlatform();
-                    this.getSelectedSeason();
-                    this.loaded_platform_seasons = true;
+                    this.loadDefaultPlatformSeasons();
+                    this.onFetchedPlatformSeasons()
                 })
+        },
+        loadDefaultPlatformSeasons: function() {
+            console.log('Loaded Default Platform Seasons');
+            this.platforms = this.default_platforms;
+            this.seasons = this.default_seasons;
+        },
+        onFetchedPlatformSeasons: function() {
+            this.getSelectedPlatform();
+            this.getSelectedSeason();
+            this.loaded_platform_seasons = true;
         },
 
         // Platform Methods
