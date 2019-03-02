@@ -2,7 +2,7 @@
     <section id="playlist-stats">
         <h1 class="header-font uc-words">{{ playlist_title }}</h1>
 
-        <div class="grid-3-col" v-if="playlist_stats && Object.keys(playlist_stats).length > 0">
+        <div class="grid-3-col" v-if="!loading && playlist_stats && Object.keys(playlist_stats).length > 0">
             <div class="card" v-for="stats in playlist_stats" :key="stats.player_username">
                 <h2 class="card-header">{{ stats.player_username }}</h2>
                 <ul>
