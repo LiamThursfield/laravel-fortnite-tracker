@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/solos', 'HomeController@index')->name('solos');
-Route::get('/duos', 'HomeController@index')->name('duos');
-Route::get('/squads', 'HomeController@index')->name('squads');
+Route::get('/', 'PlayerPlaylistStatsController@all')->name('home');
+Route::get('/solos', 'PlayerPlaylistStatsController@solos')->name('solos');
+Route::get('/duos', 'PlayerPlaylistStatsController@duos')->name('duos');
+Route::get('/squads', 'PlayerPlaylistStatsController@squads')->name('squads');
