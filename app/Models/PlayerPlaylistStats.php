@@ -47,4 +47,12 @@ use Illuminate\Database\Eloquent\Model;
 class PlayerPlaylistStats extends Model
 {
     protected $guarded = [];
+
+    /**
+     * Get the Player that the stats belong to
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function player() {
+        return $this->belongsTo('App\Models\Player');
+    }
 }

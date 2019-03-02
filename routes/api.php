@@ -21,5 +21,8 @@ use Illuminate\Http\Request;
 Route::namespace('Api\v1')
     ->prefix('v1')
     ->group(function () {
+
     Route::get('/platform_seasons', 'PlatformSeasonsController@index');
+    Route::get('playlist_stats/{platform}/{season}/{playlist}', 'PlaylistStatsController@index');
+
 });

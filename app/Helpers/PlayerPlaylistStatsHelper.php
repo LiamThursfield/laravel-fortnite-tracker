@@ -5,7 +5,6 @@ namespace App\Helpers;
 use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\PlayerStats;
 use App\ApiWrappers\TrackerNetwork\FortniteTracker\Models\Playlist;
 use App\Models\Player;
-use App\Models\PlayerLifetimeStats;
 use App\Models\PlayerPlaylistStats;
 use Carbon\Carbon;
 
@@ -92,16 +91,16 @@ class PlayerPlaylistStatsHelper {
             $stats->wherePlaylist($playlist);
         }
 
-        $stats = $stats->groupBy('player_id')
-            ->selectRaw('player_id, sum(matches_played) as matched_played, sum(kills) as kills, sum(score) as score, sum(top_1) as top_1, sum(top_5) as $top_5, sum(matches_played - top_1) as deaths')
+        $stats = $stats->groupBy(['player_id', 'player_username'])
+            ->selectRaw('player_id, player_username, sum(matches_played) as matched_played, sum(kills) as kills, sum(score) as score, sum(top_1) as top_1, sum(top_5) as $top_5, sum(matches_played - top_1) as deaths')
+            ->orderBy('player_username', 'asc')
             ->get();
 
         $player_stats = [];
 
         foreach ($stats as $player_stat) {
-           $player = $player_stat->player;
-           $player_stats[$player->username]['stats'] = $player_stat;
-           $player_stats[$player->username]['stats']['kd'] =
+           $player_stats[$player_stat->player_username]= $player_stat;
+           $player_stats[$player_stat->player_username]['kd'] =
                number_format(($player_stat->kills / $player_stat->deaths), 2);
         }
 
