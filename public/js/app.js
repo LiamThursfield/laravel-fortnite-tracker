@@ -1809,6 +1809,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     platforms: Object,
@@ -1818,7 +1820,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       selected_platform_id: '',
       selected_platform_name: '',
-      selected_season: ''
+      selected_season: '',
+      show_platforms: false,
+      show_seasons: false
     };
   },
   computed: {
@@ -1842,9 +1846,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log('select platform', platform_id);
       this.selected_platform_id = platform_id;
       this.selected_platform_name = this.platforms[platform_id];
+      this.show_platforms = false;
     },
     selectSeason: function selectSeason(season) {
       this.selected_season = season;
+      this.show_seasons = false;
     }
   },
   mounted: function mounted() {
@@ -36760,7 +36766,17 @@ var render = function() {
         _c("ul", { staticClass: "header-platform-season-nav" }, [
           _c(
             "li",
-            { staticClass: "platform-season-nav-item season-nav-item" },
+            {
+              staticClass: "platform-season-nav-item season-nav-item",
+              on: {
+                mouseover: function($event) {
+                  _vm.show_seasons = true
+                },
+                mouseleave: function($event) {
+                  _vm.show_seasons = false
+                }
+              }
+            },
             [
               _c("div", { staticClass: "nav-selected" }, [
                 _c("span", [_vm._v(_vm._s(_vm.selected_season))]),
@@ -36768,38 +36784,55 @@ var render = function() {
                 _c("i", { staticClass: "fas fa-sort-down" })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "nav-dropdown" }, [
-                _c(
-                  "ul",
-                  _vm._l(_vm.seasons, function(season) {
-                    return _c(
-                      "li",
-                      {
-                        staticClass: "nav-item",
-                        on: {
-                          mousedown: function($event) {
-                            return _vm.selected_season(season)
+              _c(
+                "div",
+                {
+                  staticClass: "nav-dropdown",
+                  class: { show: _vm.show_seasons }
+                },
+                [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.seasons, function(season) {
+                      return _c(
+                        "li",
+                        {
+                          staticClass: "nav-item",
+                          on: {
+                            mousedown: function($event) {
+                              return _vm.selectSeason(season)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(season) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ])
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(season) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
             ]
           ),
           _vm._v(" "),
           _c(
             "li",
-            { staticClass: "platform-season-nav-item platform-nav-item" },
+            {
+              staticClass: "platform-season-nav-item platform-nav-item",
+              on: {
+                mouseover: function($event) {
+                  _vm.show_platforms = true
+                },
+                mouseleave: function($event) {
+                  _vm.show_platforms = false
+                }
+              }
+            },
             [
               _c("div", { staticClass: "nav-selected" }, [
                 _c("span", [_vm._v(_vm._s(_vm.selected_platform_name))]),
@@ -36807,32 +36840,39 @@ var render = function() {
                 _c("i", { staticClass: "fas fa-sort-down" })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "nav-dropdown" }, [
-                _c(
-                  "ul",
-                  _vm._l(_vm.platforms, function(platform, platform_id) {
-                    return _c(
-                      "li",
-                      {
-                        staticClass: "nav-item",
-                        on: {
-                          mousedown: function($event) {
-                            return _vm.selectPlatform(platform_id)
+              _c(
+                "div",
+                {
+                  staticClass: "nav-dropdown",
+                  class: { show: _vm.show_platforms }
+                },
+                [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.platforms, function(platform, platform_id) {
+                      return _c(
+                        "li",
+                        {
+                          staticClass: "nav-item",
+                          on: {
+                            mousedown: function($event) {
+                              return _vm.selectPlatform(platform_id)
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(platform) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ])
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(platform) +
+                              "\n                            "
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
             ]
           )
         ])

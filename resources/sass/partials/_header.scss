@@ -2,6 +2,8 @@
 
     background: $color-neutral-10;
     padding: $spacing-4 0;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     @media screen and (max-width: $breakpoint-max-m) {
         text-align: center;
@@ -115,14 +117,6 @@
                         i, .nav-selected {
                             color: $color-primary-3;
                         }
-
-                        & .nav-dropdown {
-                            display: block;
-
-                            &:active {
-                                display: none;
-                            }
-                        }
                     }
 
                     i, .nav-selected {
@@ -137,6 +131,10 @@
                         display: none;
                         position: absolute;
                         width: 100%;
+
+                        &.show {
+                            display: block;
+                        }
 
                         ul {
                             list-style: none;
