@@ -8,6 +8,7 @@ window.Vue = require('vue');
  * Register the Global Vue Components
  */
 Vue.component('vue-header', require('./components/common/VueHeader.vue').default);
+Vue.component('playlist-stats', require('./components/playlists/PlaylistStats.vue').default);
 
 /**
  * Instantiate the Vue application
@@ -17,6 +18,7 @@ const app = new Vue({
     data() {
         return {
             loaded_platform_seasons: false,
+            event_platform_season_updated: 'platform_season_updated',
 
             // Platforms Data
             platforms: {},
@@ -70,7 +72,7 @@ const app = new Vue({
             this.getSelectedPlatform();
             this.getSelectedSeason();
             this.loaded_platform_seasons = true;
-            this.$emit('platform_seasons_updated');
+            this.$emit(this.event_platform_season_updated);
         },
 
         // Platform Methods
@@ -86,7 +88,7 @@ const app = new Vue({
             this.selected_platform_id = platform_id;
             this.selected_platform_name = this.platforms[platform_id];
             localStorage.setItem(this.local_storage_platform_id, platform_id);
-            this.$emit('platform_seasons_updated');
+            this.$emit(this.event_platform_season_updated);
         },
 
         // Season Methods
@@ -100,7 +102,7 @@ const app = new Vue({
         selectSeason: function(season) {
             this.selected_season = season;
             localStorage.setItem(this.local_storage_season, season);
-            this.$emit('platform_seasons_updated');
+            this.$emit(this.event_platform_season_updated);
         }
     },
     created() {
