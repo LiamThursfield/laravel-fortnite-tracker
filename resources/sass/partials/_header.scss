@@ -154,6 +154,10 @@
                                 text-align: center;
                                 white-space: nowrap;
 
+                                @media screen and (max-width: $breakpoint-max-l){
+                                    padding: $spacing-3;
+                                }
+
                                 &:hover {
                                     color: $color-primary-9
                                 }
