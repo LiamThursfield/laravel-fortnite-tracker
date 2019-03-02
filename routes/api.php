@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 //});
 
 // Controllers Within The "App\Http\Controllers\Admin" Namespace
-Route::namespace('Api\v1')
+Route::namespace('Api\V1')
     ->prefix('v1')
     ->group(function () {
 
