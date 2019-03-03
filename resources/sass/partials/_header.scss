@@ -1,6 +1,7 @@
 .site-header {
 
     background: $color-neutral-10;
+    box-shadow: $box-shadow-double-3;
     padding: $spacing-4 0;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
@@ -85,7 +86,7 @@
             margin: 0;
             padding: 0;
 
-            @media screen and (max-width: $breakpoint-max-xs){
+            @media screen and (max-width: $breakpoint-max-s){
                 width: 100%;
             }
 
@@ -99,7 +100,7 @@
                         margin-right: $spacing-3;
                     }
 
-                    @media screen and (max-width: $breakpoint-max-xs){
+                    @media screen and (max-width: $breakpoint-max-s){
                         width: 100%;
 
                         &:first-of-type {
@@ -139,7 +140,7 @@
                         ul {
                             list-style: none;
                             background: $color-neutral-2;
-                            box-shadow: $box-shadow-3;
+                            box-shadow: $box-shadow-double-2;
                             border-radius: $border-radius-large;
                             margin: $spacing-2 0 0 0;
                             padding: $spacing-2;
@@ -156,6 +157,14 @@
 
                                 @media screen and (max-width: $breakpoint-max-l){
                                     padding: $spacing-3;
+
+                                    &:first-of-type {
+                                        padding-top: 0;
+                                    }
+
+                                    &:last-of-type {
+                                        padding-bottom: $spacing-2;
+                                    }
                                 }
 
                                 &:hover {
