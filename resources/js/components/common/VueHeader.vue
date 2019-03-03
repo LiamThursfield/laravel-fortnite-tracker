@@ -14,7 +14,7 @@
 
                 <ul class="header-platform-season-nav" v-if="$root.$data.loaded_platform_seasons">
                     <li class="platform-season-nav-item season-nav-item"
-                    @mouseover="show_seasons = true" @mouseleave="show_seasons = false">
+                        @mouseover="show_seasons = true; show_platforms = false" @mouseleave="show_seasons = false">
                         <div class="nav-selected"><span>{{ $root.$data.selected_season }}</span> <i class="fas fa-sort-down"></i></div>
                         <div class="nav-dropdown" :class="{show:show_seasons}">
                             <ul>
@@ -28,7 +28,7 @@
                     </li>
 
                     <li class="platform-season-nav-item platform-nav-item"
-                        @mouseover="show_platforms = true" @mouseleave="show_platforms = false">
+                        @mouseover="show_platforms = true; show_seasons = false" @mouseleave="show_platforms = false">
                         <div class="nav-selected"><span>{{ $root.$data.selected_platform_name }}</span> <i class="fas fa-sort-down"></i></div>
                         <div class="nav-dropdown" :class="{show:show_platforms}">
                             <ul>
