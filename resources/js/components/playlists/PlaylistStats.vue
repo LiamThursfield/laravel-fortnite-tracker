@@ -78,7 +78,7 @@
                 let url = '/api/v1/playlist_stats/';
                 url += this.$root.$data.selected_platform_id + '/';
                 url += this.$root.$data.selected_season + '/';
-                url += this.playlist_type + '/';
+                url += this.playlist_type;
 
                 axios
                     .get(url, {
