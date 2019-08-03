@@ -99,9 +99,18 @@ class PlayerPlaylistStatsHelper {
         $player_stats = [];
 
         foreach ($stats as $player_stat) {
-           $player_stats[$player_stat->player_username]= $player_stat;
-           $player_stats[$player_stat->player_username]['kd'] =
-               number_format(($player_stat->kills / $player_stat->deaths), 2);
+           $player_stats[$player_stat->player_username] = $player_stat;
+
+           if ($player_stat->kills == 0) {
+               $kd = 0;
+           } elseif ($player_stat->deaths == 0) {
+               $kd = $player_stat->kills;
+           } else {
+               $kd = $player_stat->kills / $player_stat->deaths;
+           }
+
+            $player_stats[$player_stat->player_username]['kd'] =
+                number_format(($kd), 2);
         }
 
         return $player_stats;
