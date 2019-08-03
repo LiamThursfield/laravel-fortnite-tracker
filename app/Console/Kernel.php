@@ -27,7 +27,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('player:getstats')->everyMinute();
+        // Disabled due to Breaking Changes to the API in Season 10
+        // $schedule->command('player:getstats')->everyMinute();
     }
 
     /**
