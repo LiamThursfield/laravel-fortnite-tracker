@@ -12,7 +12,7 @@
     <div class="container">
         <div class="eol-notice">
             <i class="fas fa-info-circle"></i>
-            Due to API changes, this service stopped updating after Chapter 1 - Season 8
+            Due to API changes, this service stopped updating after Season 9.
         </div>
     </div>
 
